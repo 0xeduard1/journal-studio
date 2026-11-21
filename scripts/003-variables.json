@@ -1,0 +1,66 @@
+{
+ "id": "003-variables",
+ "series": "CS50x Week 1",
+ "caption": "Your balance, your username, your score: to a program they're all just labeled boxes called variables. And every box has a size limit, which is where crypto bugs begin 🧙\n\nDay 1 of learning crypto security from zero.\n\nFree cheat sheet: 10 crypto hacks explained. Link in bio.\n\n#learntocode #cs50 #cprogramming #solidity #smartcontracts #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 1 · CS50x WEEK 1",
+   "h": "Every app is just *boxes* with names.",
+   "say": "Your balance, your username, your score. To a program, they're all *boxes* with names."
+  },
+  {
+   "type": "code",
+   "tag": "A VARIABLE IN C",
+   "h": "Type, name, value.",
+   "code": "int coins = 3;\ncoins = coins + 1;\nprintf(\"%i\\n\", coins);",
+   "hl": [
+    1
+   ],
+   "say": "In C, a *variable* has a type, a name, and a value. Coins equals three. Add one, and you get *four*."
+  },
+  {
+   "type": "list",
+   "tag": "THE TYPE = WHAT FITS",
+   "h": "Each box holds one kind of thing.",
+   "items": [
+    [
+     "🔢",
+     "int → whole numbers, like *42*"
+    ],
+    [
+     "🔤",
+     "char → one character, like *'A'*"
+    ],
+    [
+     "💬",
+     "string → text, like *\"hi\"*"
+    ]
+   ],
+   "say": "The type says what fits. *int* for whole numbers, *char* for one character, *string* for text."
+  },
+  {
+   "type": "explain",
+   "tag": "THE CATCH",
+   "h": "Every box has a *size limit*.",
+   "lines": [
+    "A 32-bit int stops near *2.1 billion*",
+    "Go past it → *overflow*"
+   ],
+   "say": "The catch: every box has a size *limit*. A thirty two bit int stops near two point one billion. Push past it, and you get *overflow*."
+  },
+  {
+   "type": "big",
+   "tag": "WHY CRYPTO CARES",
+   "big": "256",
+   "sub": "Token balances in Solidity are *uint256*: whole numbers, no minus sign, 256 bits.",
+   "say": "In Solidity, a token balance is usually a *uint*, two hundred fifty six bits. And overflow bugs have cost real projects real money."
+  },
+  {
+   "type": "outro",
+   "h": "Next: *if* and conditions.",
+   "sub": "Follow the journey 🧙",
+   "say": "Next up, if and conditions. Follow the journey."
+  }
+ ]
+}
