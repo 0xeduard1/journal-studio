@@ -1,11 +1,11 @@
 {
  "id": "001-binary",
  "series": "CS50x Week 0",
- "caption": "Computers only understand 0 and 1. Here's how they count with them, and why every crypto address starts with 0x 🧙\n\nDay 2 of learning crypto security from zero.\n\n#learntocode #cs50 #binary #crypto #cybersecurity #codingjourney",
+ "caption": "Computers only understand 0 and 1. Here's how they count with them, and why every crypto address starts with 0x 🧙\n\nDay 1 of learning crypto security from zero.\n\n#learntocode #cs50 #binary #crypto #cybersecurity #codingjourney",
  "scenes": [
   {
    "type": "title",
-   "tag": "DAY 2 · CS50x WEEK 0",
+   "tag": "DAY 1 · CS50x WEEK 0",
    "h": "Computers only know *two* numbers.",
    "say": "Computers only understand two numbers. *Zero*, and *one*. So how do they show you everything else?"
   },

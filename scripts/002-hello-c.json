@@ -1,11 +1,11 @@
 {
  "id": "002-hello-c",
  "series": "CS50x Week 1",
- "caption": "My first real program, in C. Five lines, one compiler, and the same idea that runs every smart contract 🧙\n\nDay 2 of learning crypto security from zero.\n\n#learntocode #cprogramming #cs50 #solidity #web3 #codingjourney",
+ "caption": "My first real program, in C. Five lines, one compiler, and the same idea that runs every smart contract 🧙\n\nDay 1 of learning crypto security from zero.\n\n#learntocode #cprogramming #cs50 #solidity #web3 #codingjourney",
  "scenes": [
   {
    "type": "title",
-   "tag": "DAY 2 · CS50x WEEK 1",
+   "tag": "DAY 1 · CS50x WEEK 1",
    "h": "My first line of *real* code.",
    "say": "Week one of Harvard's CS fifty. My first *real* program, in C."
   },
