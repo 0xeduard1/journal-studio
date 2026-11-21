@@ -1,0 +1,85 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"DejaVu Sans",Arial,sans-serif;background:#0B0E17;color:#ECEBFF;font-size:10.6pt;line-height:1.42}
+.page{width:210mm;min-height:297mm;padding:16mm 15mm;page-break-after:always;position:relative}
+.page:last-child{page-break-after:auto}
+.kicker{color:#7EE0B0;font-size:9pt;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+h1{font-size:30pt;line-height:1.05;margin:6px 0 8px}
+h1 span{color:#8B7CF6}
+.sub{color:#C9C5EE;font-size:11.5pt;margin:0 0 14px;max-width:150mm}
+.hero{display:flex;gap:10mm;align-items:center}
+.hero img{width:42mm}
+.card{background:#151A27;border:1px solid #262E42;border-radius:10px;padding:9px 12px;margin:0 0 7px}
+.top{display:flex;justify-content:space-between;align-items:baseline}
+.n{color:#8B7CF6;font-weight:700;margin-right:6px}
+.name{font-weight:700;font-size:11.5pt}
+.meta{color:#F5B544;font-size:9pt;white-space:nowrap}
+.bug{color:#7EE0B0;font-size:8.6pt;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:3px 0 2px}
+.card p{margin:2px 0}
+.lesson{color:#ECEBFF}.lesson b{color:#8B7CF6}
+.foot{position:absolute;bottom:10mm;left:15mm;right:15mm;color:#8C88B0;font-size:8.5pt;display:flex;justify-content:space-between}
+.patterns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.patterns .card p{color:#C9C5EE}
+</style></head><body>
+<div class="page">
+<div class="hero"><div>
+<div class="kicker">Free cheat sheet · 0xeduard1</div>
+<h1>10 crypto hacks,<br><span>3 lines each.</span></h1>
+<p class="sub">What broke, how much it cost, and the one lesson a smart contract auditor takes from it. Written by a beginner, for beginners. Amounts are approximate, in USD at the time of the attack.</p>
+</div><img src="../media/brand/code-mage.png"></div>
+
+<div class="card"><div class="top"><div><span class="n">01</span><span class="name">The DAO</span></div><div class="meta">Jun 2016 · ~$60M</div></div>
+<div class="bug">Reentrancy</div><p>The contract sent ETH <i>before</i> updating the balance, so the attacker's contract called withdraw again and again inside the same transaction.</p>
+<p class="lesson"><b>Lesson:</b> update state first, send money last (checks-effects-interactions).</p></div>
+
+<div class="card"><div class="top"><div><span class="n">02</span><span class="name">Parity Multisig</span></div><div class="meta">Nov 2017 · ~$150M frozen</div></div>
+<div class="bug">Unprotected initialization</div><p>A shared library contract was never initialized. Someone called init, became its owner, then destroyed it. Every wallet that depended on it was frozen forever.</p>
+<p class="lesson"><b>Lesson:</b> every initializer must be protected, including in library and implementation contracts.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">03</span><span class="name">Poly Network</span></div><div class="meta">Aug 2021 · ~$611M</div></div>
+<div class="bug">Access control</div><p>A cross-chain message could call a privileged function and replace the "keeper" that approves withdrawals. The attacker made himself keeper. (Funds were later returned.)</p>
+<p class="lesson"><b>Lesson:</b> ask "who can call this?" for every function that changes who is in charge.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">04</span><span class="name">Wormhole</span></div><div class="meta">Feb 2022 · ~$325M</div></div>
+<div class="bug">Signature verification bypass</div><p>The bridge on Solana trusted a fake "signatures already verified" account, so the attacker minted 120,000 wrapped ETH backed by nothing.</p>
+<p class="lesson"><b>Lesson:</b> never trust an input that claims a check already happened. Verify it yourself.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">05</span><span class="name">Ronin Bridge</span></div><div class="meta">Mar 2022 · ~$625M</div></div>
+<div class="bug">Compromised keys</div><p>Withdrawals needed 5 of 9 validator signatures. Attackers got 5 private keys, partly through social engineering, and signed the withdrawals themselves.</p>
+<p class="lesson"><b>Lesson:</b> perfect code still fails if too few people hold the keys.</p></div>
+<div class="foot"><span>0xeduard1 · learning crypto security from zero, in public</span><span>1 / 2</span></div>
+</div>
+
+<div class="page">
+<div class="card"><div class="top"><div><span class="n">06</span><span class="name">Beanstalk</span></div><div class="meta">Apr 2022 · ~$182M</div></div>
+<div class="bug">Flash-loan governance</div><p>Voting power was counted at the moment of the vote. The attacker borrowed a billion dollars for one transaction, voted his own proposal through, and paid the loan back.</p>
+<p class="lesson"><b>Lesson:</b> anything measured "right now" can be borrowed for one block. Use delays and snapshots.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">07</span><span class="name">Nomad Bridge</span></div><div class="meta">Aug 2022 · ~$190M</div></div>
+<div class="bug">Bad initialization in an upgrade</div><p>An upgrade set the trusted root to zero, which made every message count as valid. Hundreds of copycats drained it by copy-pasting the first attack.</p>
+<p class="lesson"><b>Lesson:</b> audit the upgrade and its config values, not just the code.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">08</span><span class="name">Mango Markets</span></div><div class="meta">Oct 2022 · ~$114M</div></div>
+<div class="bug">Oracle manipulation</div><p>The attacker pumped the price of a thin token, used the inflated position as collateral, and borrowed everything else in the protocol.</p>
+<p class="lesson"><b>Lesson:</b> a price is only as safe as the market behind it. Thin markets are easy to move.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">09</span><span class="name">Euler Finance</span></div><div class="meta">Mar 2023 · ~$197M</div></div>
+<div class="bug">Missing health check</div><p>A new "donate to reserves" function let users reduce their own collateral without checking if the position was still solvent. (Funds were later returned.)</p>
+<p class="lesson"><b>Lesson:</b> every new function must keep the protocol's core rules (invariants) true.</p></div>
+
+<div class="card"><div class="top"><div><span class="n">10</span><span class="name">Curve pools (Vyper bug)</span></div><div class="meta">Jul 2023 · ~$70M</div></div>
+<div class="bug">Compiler bug → reentrancy</div><p>The code had a reentrancy lock, but some versions of the Vyper compiler built it wrong. The lock silently did nothing.</p>
+<p class="lesson"><b>Lesson:</b> your tools are part of the attack surface, compiler included.</p></div>
+
+<div class="kicker" style="margin-top:12px">The pattern behind all 10</div>
+<div class="patterns">
+<div class="card"><p><b style="color:#ECEBFF">Order of operations</b><br>Who moves money, and when? (DAO, Curve)</p></div>
+<div class="card"><p><b style="color:#ECEBFF">Who is allowed?</b><br>Access control and keys. (Parity, Poly, Ronin)</p></div>
+<div class="card"><p><b style="color:#ECEBFF">What do we trust?</b><br>Inputs, prices, messages. (Wormhole, Mango, Nomad)</p></div>
+<div class="card"><p><b style="color:#ECEBFF">What must always be true?</b><br>Invariants and timing. (Euler, Beanstalk)</p></div>
+</div>
+<p style="color:#C9C5EE;margin-top:10px">I'm learning to find these before they happen. One email a week with what I learned and one new hack explained. Reply anytime, I read everything. Eduard</p>
+<div class="foot"><span>0xeduard1 · learning crypto security from zero, in public</span><span>2 / 2</span></div>
+</div>
+</body></html>
