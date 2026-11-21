@@ -8,6 +8,7 @@ import argparse, asyncio, json, os, re, shutil, subprocess, sys, tempfile, urlli
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
 MODELS = HERE / "models"
 URLS = {
     "kokoro-v1.0.onnx": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
@@ -95,18 +96,26 @@ def main():
     ap.add_argument("script"); ap.add_argument("out")
     ap.add_argument("--voice", default="am_michael"); ap.add_argument("--speed", type=float, default=1.0)
     ap.add_argument("--fps", type=int, default=30)
+    ap.add_argument("--music", type=float, default=0.10, help="music volume under the voice (0 = no music)")
     a = ap.parse_args()
     script = json.loads(Path(a.script).read_text())
     ensure_models()
     import soundfile as sf
     wav, timeline, total = tts(script["scenes"], a.voice, a.speed)
     tmp = Path(tempfile.mkdtemp())
+    if a.music > 0:
+        from music import track
+        import numpy as np
+        m = track(len(wav) / SR + 0.1, seed=len(script["scenes"]))
+        m = np.pad(m, (0, max(0, len(wav) - len(m))))[:len(wav)]
+        wav = wav + a.music * m
+        wav = wav / max(1.0, float(abs(wav).max()) / 0.98)
     sf.write(tmp / "voice.wav", wav, SR)
     asyncio.run(frames(script, timeline, total, a.fps, tmp))
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(a.fps), "-i", f"{tmp}/%05d.jpg",
                     "-i", str(tmp / "voice.wav"), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-                    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", a.out],
+                    "-pix_fmt", "yuv420p", "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-shortest", "-movflags", "+faststart", a.out],
                    check=True)
     shutil.rmtree(tmp)
     print(f"{a.out}  {total:.1f}s")
