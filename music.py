@@ -21,22 +21,29 @@ def _pluck(f, dur):
     return s * np.exp(-t * 6)
 
 
-def track(seconds, seed=0):
-    # Am - F - C - G, 2 s per chord (60 bpm feel)
-    prog = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]
+MOODS = {
+    # name: (chord progression as MIDI triads, seconds per chord, arpeggio notes per chord, pluck level)
+    "calm":   ([[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]], 2.0, 4, 0.18),   # Am F C G, lo-fi
+    "upbeat": ([[48, 52, 55], [55, 59, 62], [57, 60, 64], [53, 57, 60]], 1.0, 4, 0.24),   # C G Am F, faster
+    "dark":   ([[50, 53, 57], [46, 50, 53], [48, 52, 55], [45, 49, 52]], 2.0, 2, 0.14),   # Dm Bb C A, tense
+}
+
+
+def track(seconds, seed=0, mood="calm"):
+    prog, step, notes, pl = MOODS[mood]
     rng = np.random.default_rng(seed)
     n = int(SR * seconds)
     out = np.zeros(n + SR * 3)
-    step, i, pos = 2.0, 0, 0
+    i, pos = 0, 0
     while pos < n:
         ch = prog[i % len(prog)]
         pad = _pad([_note(m - 12) for m in ch] + [_note(ch[0] - 24)], step + 0.8)
         out[pos:pos + len(pad)] += 0.55 * pad
-        for k in range(4):  # arpeggio, one note every half second
+        for k in range(notes):  # arpeggio spread evenly over the chord
             m = ch[(k + rng.integers(0, 2)) % 3] + 12
             p = _pluck(_note(m), 0.9)
-            a = pos + int(SR * k * 0.5)
-            out[a:a + len(p)] += 0.18 * p
+            a = pos + int(SR * k * step / notes)
+            out[a:a + len(p)] += pl * p
         pos += int(SR * step); i += 1
     out = out[:n]
     # gentle low-pass (moving average) and fades

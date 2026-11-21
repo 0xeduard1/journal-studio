@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """0xeduard1 studio: turns a clip script (JSON) into a vertical 1080x1920 MP4 with voice and captions.
 
-Usage: python3 make.py scripts/clip.json out/clip.mp4 [--voice am_michael] [--fps 30]
+Usage: python3 make.py scripts/clip.json out/clip.mp4 [--voice am_michael] [--music 0.10] [--mood calm|upbeat|dark] [--fps 30]
 Open source only: Kokoro TTS (kokoro-onnx), Playwright/Chromium, ffmpeg.
 """
 import argparse, asyncio, json, os, re, shutil, subprocess, sys, tempfile, urllib.request
@@ -97,6 +97,7 @@ def main():
     ap.add_argument("--voice", default="am_michael"); ap.add_argument("--speed", type=float, default=1.0)
     ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--music", type=float, default=0.10, help="music volume under the voice (0 = no music)")
+    ap.add_argument("--mood", default="calm", choices=["calm", "upbeat", "dark"], help="music style")
     a = ap.parse_args()
     script = json.loads(Path(a.script).read_text())
     ensure_models()
@@ -106,7 +107,7 @@ def main():
     if a.music > 0:
         from music import track
         import numpy as np
-        m = track(len(wav) / SR + 0.1, seed=len(script["scenes"]))
+        m = track(len(wav) / SR + 0.1, seed=len(script["scenes"]), mood=a.mood)
         m = np.pad(m, (0, max(0, len(wav) - len(m))))[:len(wav)]
         wav = wav + a.music * m
         wav = wav / max(1.0, float(abs(wav).max()) / 0.98)

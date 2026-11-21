@@ -25,3 +25,8 @@ Scene types: `title`, `explain` (`lines`), `code` (`code`, `hl`), `list` (`items
 `*word*` is highlighted on screen and in the captions. `say` is what the voice reads.
 
 Follow the journey: [x.com/0xeduard1](https://x.com/0xeduard1)
+
+
+## Music moods
+
+The background track is generated in code (no samples, no copyright). Pick a style with `--mood calm|upbeat|dark` and the volume with `--music 0.10` (`--music 0` = no music). Used for A/B testing which style keeps viewers watching.
