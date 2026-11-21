@@ -1,0 +1,4 @@
+models/
+out/
+*.wav
+__pycache__/

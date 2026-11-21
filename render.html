@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{background:#0b0e17;width:1080px;height:1920px;overflow:hidden}
+#s{position:relative;width:1080px;height:1920px;overflow:hidden;color:#ecebff;font-family:Nunito,Montserrat,sans-serif;
+ background:radial-gradient(120% 70% at 50% 0%,#1c1840 0%,#0b0e17 62%)}
+.wrap{position:absolute;left:84px;right:84px;top:250px}
+.tag{font:900 34px Nunito,sans-serif;color:#8b7cf6;letter-spacing:.03em}
+h1{font:700 96px/1.04 Fredoka,Montserrat,sans-serif;margin-top:22px}
+em{font-style:normal;color:#8b7cf6}
+.body{font:800 50px/1.32 Nunito,sans-serif;color:#d5d1f5;margin-top:34px}
+.big{font:700 300px/1 Fredoka,sans-serif;color:#8b7cf6;margin-top:170px;text-align:center;text-shadow:0 0 60px #8b7cf655}
+.bigsub{font:800 52px/1.3 Nunito,sans-serif;text-align:center;margin-top:24px;color:#d5d1f5}
+.code{margin-top:44px;background:#0f1422;border:3px solid #262f45;border-radius:34px;padding:38px 40px;font:500 40px/1.6 'JetBrains Mono',monospace;white-space:pre;overflow:hidden}
+.code .ln{display:block;padding:0 12px;border-radius:12px}
+.code .ln.hl{background:#8b7cf62e;box-shadow:inset 6px 0 0 #8b7cf6}
+.kw{color:#c792ff}.st{color:#7ee0b0}.nu{color:#f5b544}.cm{color:#6b7290}.fn{color:#7cc4ff}
+.list{margin-top:44px;display:grid;gap:24px}
+.row{display:flex;gap:26px;align-items:center;background:#141a2a;border:3px solid #262f45;border-radius:30px;padding:28px 32px;font:800 46px/1.25 Nunito,sans-serif}
+.row .i{font-size:54px;flex:none;width:70px;text-align:center}
+.cap{position:absolute;left:70px;right:70px;top:1330px;text-align:center}
+.cap span{display:inline;font:900 64px/1.35 Nunito,sans-serif;color:#fff;background:#0b0e17cc;padding:6px 18px;border-radius:18px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cap b{color:#f5b544;font-weight:900}
+.foot{position:absolute;left:84px;top:150px;font:900 32px Nunito,sans-serif;color:#8b7cf6;opacity:.9}
+.prog{position:absolute;left:0;top:0;height:10px;background:#8b7cf6}
+.mage{position:absolute}
+</style></head><body><div id="s"></div>
+<script>
+const MAGE=`<ellipse cx="0" cy="4" rx="28" ry="6" fill="#000" opacity=".5"/>
+ <path d="M-30,0 Q-29,-48 0,-56 Q29,-48 30,0 Z" fill="#1f2635"/>
+ <path d="M-15,-57 L15,-57 L12,-38 Q0,-33 -12,-38 Z" fill="#05070b"/>
+ <g class="eyes"><ellipse cx="-6" cy="-49" rx="3.6" ry="2.1" fill="#8b7cf6"/><ellipse cx="6" cy="-49" rx="3.6" ry="2.1" fill="#8b7cf6"/></g>
+ <path d="M-21,-59 Q-6,-80 6,-114 Q1,-84 20,-59 Z" fill="#1f2635"/>
+ <ellipse cx="0" cy="-58" rx="35" ry="6.5" fill="#263040"/>
+ <path d="M-20,-61 Q0,-56 20,-62" fill="none" stroke="#8b7cf6" stroke-width="3.6" stroke-linecap="round"/>
+ <text x="1" y="-69" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700" font-size="11" fill="#8b7cf6">0x</text>
+ <line x1="31" y1="-2" x2="31" y2="-72" stroke="#6b7a90" stroke-width="4" stroke-linecap="round"/>
+ <path d="M22,-26 Q31,-33 39,-27" fill="none" stroke="#2c3546" stroke-width="5" stroke-linecap="round"/>
+ <circle class="glow" cx="31" cy="-80" r="17" fill="#8b7cf6"/>
+ <polygon points="31,-90 39.7,-85 39.7,-75 31,-70 22.3,-75 22.3,-85" fill="#8b7cf6"/>
+ <polygon points="31,-85 35,-82.5 35,-77.5 31,-75 27,-77.5 27,-82.5" fill="#6a5acd"/>`;
+let seed=11;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const STARS=Array.from({length:90},()=>[rnd()*1080,rnd()*1920,rnd()*2.6+.8,rnd()*6.28]);
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const KW=/\b(int|uint256|uint8|uint|string|bool|address|function|return|returns|if|else|for|while|void|char|float|public|private|external|view|pure|contract|mapping|require|pragma|solidity|include|define|const|struct|memory|storage|msg|emit|event|modifier|true|false)\b/g;
+function hlCode(line){
+  const m=line.match(/^(.*?)(\/\/.*)?$/);let code=esc(m[1]),cm=m[2]?`<span class="cm">${esc(m[2])}</span>`:'';
+  code=code.replace(/(&quot;|")(.*?)(")/g,'<span class="st">"$2"</span>')
+    .replace(KW,'<span class="kw">$1</span>')
+    .replace(/(^|[^\w#"])(\d+)/g,'$1<span class="nu">$2</span>')
+    .replace(/\b([a-zA-Z_]\w*)(?=\()/g,'<span class="fn">$1</span>');
+  return code+cm;}
+const ease=x=>1-Math.pow(1-Math.min(Math.max(x,0),1),3);
+const fade=(t,d=0)=>{const k=ease((t-d)/0.45);return `opacity:${k};transform:translateY(${(1-k)*40}px)`};
+const emph=s=>esc(s).replace(/\*(.+?)\*/g,'<em>$1</em>');
+
+// state: {sc, t, dur, cap, idx, total, T, Ttot}
+window.draw=function(S){
+  const sc=S.sc,t=S.t;let inner='',mage=null;
+  if(sc.type==='title'){
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'')}</div><h1 style="${fade(t,.15)}">${emph(sc.h)}</h1>${sc.sub?`<div class="body" style="${fade(t,.4)}">${emph(sc.sub)}</div>`:''}`;
+    mage={x:540,y:1250,s:5.6};
+  }else if(sc.type==='explain'){
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'')}</div><h1 style="${fade(t,.1)}">${emph(sc.h)}</h1>`+
+      (sc.lines||[]).map((l,i)=>`<div class="body" style="${fade(t,.5+i*(sc.step||Math.max((S.dur-1.6)/Math.max((sc.lines||[]).length,1),.6)))}">${emph(l)}</div>`).join('');
+    mage={x:900,y:1300,s:2.6};
+  }else if(sc.type==='code'){
+    const L=sc.code.split('\n'),per=Math.max((S.dur-1)/L.length,.25);
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'')}</div><h1 style="${fade(t,.1)};font-size:80px">${emph(sc.h)}</h1><div class="code" style="${fade(t,.3)}">`+
+      L.map((l,i)=>`<span class="ln ${(sc.hl||[]).includes(i+1)&&t>.6+L.length*per*.6?'hl':''}" style="opacity:${t>.4+i*per?1:0}">${hlCode(l)||' '}</span>`).join('')+`</div>`;
+  }else if(sc.type==='list'){
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'')}</div><h1 style="${fade(t,.1)}">${emph(sc.h)}</h1><div class="list">`+
+      sc.items.map((it,i)=>`<div class="row" style="${fade(t,.5+i*(sc.step||Math.max((S.dur-1.6)/sc.items.length,.5)))}"><span class="i">${it[0]}</span><span>${emph(it[1])}</span></div>`).join('')+`</div>`;
+  }else if(sc.type==='big'){
+    const k=ease(t/0.6);
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'')}</div><div class="big" style="opacity:${k};transform:scale(${.6+.4*k})">${esc(sc.big)}</div><div class="bigsub" style="${fade(t,.5)}">${emph(sc.sub||'')}</div>`;
+    mage={x:880,y:1290,s:2.4};
+  }else if(sc.type==='outro'){
+    inner=`<div class="tag" style="${fade(t)}">${esc(sc.tag||'FOLLOW THE JOURNEY')}</div><h1 style="${fade(t,.15)}">${emph(sc.h)}</h1>${sc.sub?`<div class="body" style="${fade(t,.4)}">${emph(sc.sub)}</div>`:''}`;
+    mage={x:540,y:1280,s:5};
+  }
+  const T=S.T;
+  const stars=`<svg width="1080" height="1920" style="position:absolute;inset:0">${STARS.map(([x,y,r,p])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${(.35+.55*(.5+.5*Math.sin(T*1.6+p))).toFixed(2)}"/>`).join('')}</svg>`;
+  let mg='';
+  if(mage){const bob=Math.sin(T*2.6)*8,glow=.22+.2*(.5+.5*Math.sin(T*3.4)),blink=(T%4.2)<.13?.1:1,ap=ease(t/.5);
+    mg=`<svg class="mage" width="${110*mage.s}" height="${140*mage.s}" viewBox="-50 -125 110 140" style="left:${mage.x-55*mage.s}px;top:${mage.y-125*mage.s+bob}px;opacity:${ap}">${MAGE.replace('class="glow"',`opacity="${glow.toFixed(2)}"`).replace('class="eyes"',`transform="translate(0,-49) scale(1,${blink}) translate(0,49)"`)}</svg>`;}
+  const cap=S.cap?`<div class="cap"><span>${S.cap}</span></div>`:'';
+  document.getElementById('s').innerHTML=stars+`<div class="prog" style="width:${(T/S.Ttot*100).toFixed(2)}%"></div><div class="foot">@0xeduard1 · ${esc(S.series||'')}</div>`+mg+`<div class="wrap">${inner}</div>`+cap;
+};
+</script></body></html>

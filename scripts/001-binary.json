@@ -1,0 +1,56 @@
+{
+ "id": "001-binary",
+ "series": "CS50x Week 0",
+ "caption": "Computers only understand 0 and 1. Here's how they count with them, and why every crypto address starts with 0x 🧙\n\nDay 2 of learning crypto security from zero.\n\n#learntocode #cs50 #binary #crypto #cybersecurity #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 2 · CS50x WEEK 0",
+   "h": "Computers only know *two* numbers.",
+   "say": "Computers only understand two numbers. *Zero*, and *one*. So how do they show you everything else?"
+  },
+  {
+   "type": "explain",
+   "tag": "ONE BIT",
+   "h": "A light bulb = 1 *bit*.",
+   "lines": [
+    "Off = *0*",
+    "On = *1*"
+   ],
+   "say": "Think of a light bulb. Off is *zero*. On is *one*. That's one *bit*."
+  },
+  {
+   "type": "list",
+   "tag": "PLACE VALUES: 4 · 2 · 1",
+   "h": "Three bulbs in a row.",
+   "items": [
+    [
+     "💡",
+     "101 = 4 + 0 + 1 = *5*"
+    ],
+    [
+     "💡",
+     "111 = 4 + 2 + 1 = *7*"
+    ],
+    [
+     "💡",
+     "8 bits = 1 byte = up to *255*"
+    ]
+   ],
+   "say": "Put three bulbs in a row. Each one is worth double the one on its right: four, two, one. One, zero, one means four plus one. That's *five*."
+  },
+  {
+   "type": "big",
+   "tag": "WHY CRYPTO CARES",
+   "big": "0x",
+   "sub": "Wallet addresses are written in *hexadecimal*: base 16, digits 0–9 and A–F.",
+   "say": "And here's why it matters for crypto. Every wallet address starts with *zero x*. It means the number is written in *hexadecimal*, base sixteen."
+  },
+  {
+   "type": "outro",
+   "h": "Next: my first *C program*.",
+   "sub": "Follow the journey 🧙",
+   "say": "Next, I write my first program in C. Follow the journey."
+  }
+ ]
+}

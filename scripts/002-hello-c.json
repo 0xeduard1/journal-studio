@@ -1,0 +1,46 @@
+{
+ "id": "002-hello-c",
+ "series": "CS50x Week 1",
+ "caption": "My first real program, in C. Five lines, one compiler, and the same idea that runs every smart contract 🧙\n\nDay 2 of learning crypto security from zero.\n\n#learntocode #cprogramming #cs50 #solidity #web3 #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 2 · CS50x WEEK 1",
+   "h": "My first line of *real* code.",
+   "say": "Week one of Harvard's CS fifty. My first *real* program, in C."
+  },
+  {
+   "type": "code",
+   "tag": "HELLO.C",
+   "h": "Five lines.",
+   "code": "#include <stdio.h>\n\nint main(void)\n{\n    printf(\"hello, world\\n\");\n}",
+   "hl": [
+    5
+   ],
+   "say": "Five lines. The first one borrows a toolbox called standard I O. *Main* is where the program starts. And *printf* prints text to the screen."
+  },
+  {
+   "type": "explain",
+   "tag": "THE MAGIC STEP",
+   "h": "Then you *compile* it.",
+   "lines": [
+    "Your code → *compiler* → 0s and 1s",
+    "make hello  →  ./hello"
+   ],
+   "say": "But computers don't read C. A *compiler* translates it into zeros and ones. In the terminal: make hello, then dot slash hello."
+  },
+  {
+   "type": "big",
+   "tag": "SAME IDEA IN CRYPTO",
+   "big": "{ }",
+   "sub": "Solidity → compiler → *bytecode* the blockchain runs.",
+   "say": "Smart contracts work the same way. *Solidity* code gets compiled into *bytecode*, and that's what the blockchain actually runs."
+  },
+  {
+   "type": "outro",
+   "h": "Next: *variables* and *if*.",
+   "sub": "Follow the journey 🧙",
+   "say": "Next up, variables and conditions. Follow the journey."
+  }
+ ]
+}
