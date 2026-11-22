@@ -1,0 +1,57 @@
+{
+ "id": "004-the-dao",
+ "series": "Hack explained",
+ "caption": "In 2016 one smart contract lost about 3.6 million ETH because it sent money before updating the balance. The attacker kept calling back in, and the contract kept paying 🧙\n\nDay 2 of learning crypto security from zero.\n\nFree cheat sheet: 10 crypto hacks explained. Link in bio.\n\n#web3security #smartcontracts #solidity #ethereum #reentrancy #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 2 · HACK EXPLAINED",
+   "h": "One wrong *order* nearly broke Ethereum.",
+   "say": "In 2016, one line in the wrong *order* nearly broke Ethereum."
+  },
+  {
+   "type": "explain",
+   "tag": "THE DAO · JUNE 2016",
+   "h": "A fund that lived in *code*.",
+   "lines": [
+    "People sent in *ETH*, got voting tokens",
+    "No bank. Just a *smart contract*"
+   ],
+   "say": "The DAO was an investment fund that lived in a *smart contract*. People sent in ETH and got voting tokens."
+  },
+  {
+   "type": "code",
+   "tag": "THE BUG (SIMPLIFIED)",
+   "h": "Pay first, update *later*.",
+   "code": "function withdraw() public {\n  uint amt = bal[msg.sender];\n  // 1. send ETH first\n  msg.sender.call{value: amt}(\"\");\n  // 2. update the books later\n  bal[msg.sender] = 0;\n}",
+   "hl": [
+    4,
+    6
+   ],
+   "say": "The bug was the order. It *sent* the money first, and only *later* set the balance to zero."
+  },
+  {
+   "type": "explain",
+   "tag": "REENTRANCY",
+   "h": "The attacker called *back in*.",
+   "lines": [
+    "Each payment triggered *another* withdraw",
+    "The balance still looked *full*"
+   ],
+   "say": "The attacker's contract called withdraw *again* each time it got paid, while the balance still looked full. That's *reentrancy*."
+  },
+  {
+   "type": "big",
+   "tag": "THE DAMAGE",
+   "big": "3.6M",
+   "sub": "*ETH* drained, about $60M at the time. Ethereum hard-forked to return it.",
+   "say": "About three point six million ETH, roughly sixty million dollars then. Ethereum *hard forked* to return it."
+  },
+  {
+   "type": "outro",
+   "h": "Update the books *before* you pay.",
+   "sub": "Full story in the Hack Library. Link in bio 🧙",
+   "say": "Lesson: update the balance *before* you send money. Full story in the Hack Library, link in bio."
+  }
+ ]
+}
