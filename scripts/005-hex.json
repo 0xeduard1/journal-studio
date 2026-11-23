@@ -1,0 +1,66 @@
+{
+ "id": "005-hex",
+ "series": "Math for crypto",
+ "caption": "Every Ethereum address starts with 0x because it's written in hexadecimal: base 16, digits 0–9 and A–F. Two hex digits make one byte, so an address is 40 hex characters, 20 bytes 🧙\n\nDay 3 of learning crypto security from zero.\n\nFree cheat sheet: 10 crypto hacks explained. Link in bio.\n\n#learntocode #hexadecimal #ethereum #smartcontracts #web3security #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 3 · MATH FOR CRYPTO",
+   "h": "Why every address starts with *0x*.",
+   "say": "Every Ethereum address starts with *zero x*. Here's what that means."
+  },
+  {
+   "type": "explain",
+   "tag": "HEXADECIMAL = BASE 16",
+   "h": "16 digits, not *10*.",
+   "lines": [
+    "0 to 9, then *A B C D E F*",
+    "A = 10 … F = *15*"
+   ],
+   "say": "Zero x means *hexadecimal*, base sixteen. After nine, you count with letters: A is ten, up to F, *fifteen*."
+  },
+  {
+   "type": "list",
+   "tag": "PLACE VALUES: 16 · 1",
+   "h": "Same trick as binary.",
+   "items": [
+    [
+     "🔢",
+     "0x10 = 1×16 + 0 = *16*"
+    ],
+    [
+     "🔢",
+     "0xFF = 15×16 + 15 = *255*"
+    ],
+    [
+     "💡",
+     "1 hex digit = exactly *4 bits*"
+    ]
+   ],
+   "say": "Same trick as binary, with sixteens. One zero is *sixteen*. F F is *two fifty five*, one full byte."
+  },
+  {
+   "type": "big",
+   "tag": "AN ETHEREUM ADDRESS",
+   "big": "40",
+   "sub": "hex characters = *20 bytes*. Add the 0x and you get 42.",
+   "say": "Two hex digits make one byte. So an address is *forty* hex characters: twenty bytes."
+  },
+  {
+   "type": "explain",
+   "tag": "WHY AUDITORS CARE",
+   "h": "Contract bytecode is *hex* too.",
+   "lines": [
+    "Compiled contracts are bytes, shown in *hex*",
+    "Most Solidity contracts start *0x6080…*"
+   ],
+   "say": "Contract bytecode is shown in hex too. Most Solidity contracts start with *six zero eight zero*."
+  },
+  {
+   "type": "outro",
+   "h": "Hex is just *counting* with 16 digits.",
+   "sub": "Follow the journey 🧙",
+   "say": "Hex is just counting with sixteen digits. Follow the journey."
+  }
+ ]
+}
