@@ -1,0 +1,66 @@
+{
+ "id": "006-harvest",
+ "series": "Hack explained",
+ "caption": "In October 2020, Harvest Finance's vaults priced their shares from a Curve pool that one big trade could move. With flash loans, the attacker nudged the price, bought shares cheap, pushed it back and sold them dear, about 30 times in 7 minutes. Roughly $34M left the vaults 🧙\n\nDay 4 of learning crypto security from zero.\n\nFull story in the Hack Library: https://0xeduard1.github.io/hacks/h/harvest-finance-2020/\n\n#web3security #smartcontracts #defi #flashloan #ethereum #codingjourney",
+ "scenes": [
+  {
+   "type": "title",
+   "tag": "DAY 4 · HACK EXPLAINED",
+   "h": "A borrowed $50M. *7 minutes*. $34M gone.",
+   "say": "Someone borrowed fifty million dollars and drained a vault in *seven minutes*."
+  },
+  {
+   "type": "explain",
+   "tag": "HARVEST FINANCE · OCT 2020",
+   "h": "A vault that farmed *yield*.",
+   "lines": [
+    "Users deposited *USDC* and *USDT*",
+    "The vault put the money in a *Curve* pool"
+   ],
+   "say": "Harvest Finance ran vaults. People deposited *stablecoins*, and the vault put them in a *Curve* pool."
+  },
+  {
+   "type": "explain",
+   "tag": "THE BUG",
+   "h": "Share price from a *live* pool.",
+   "lines": [
+    "One big trade could *move* that price",
+    "The safety check ignored *small* moves"
+   ],
+   "say": "The vault priced its shares from a *live* pool price, one big trade could move it, and its check ignored *small* moves."
+  },
+  {
+   "type": "list",
+   "tag": "THE LOOP (SIMPLIFIED)",
+   "h": "Small edge, *many* times.",
+   "items": [
+    [
+     "📉",
+     "Nudge the price, buy shares *cheap*"
+    ],
+    [
+     "📈",
+     "Push it back, sell them *dear*"
+    ],
+    [
+     "🔁",
+     "Under 1% per round, about *30 rounds*"
+    ]
+   ],
+   "say": "So: nudge the price, buy shares *cheap*, push it back, sell *dear*. About thirty rounds."
+  },
+  {
+   "type": "big",
+   "tag": "THE DAMAGE",
+   "big": "$34M",
+   "sub": "left the vaults. The attacker kept about *$24M*.",
+   "say": "*Thirty four million dollars* left the vaults."
+  },
+  {
+   "type": "outro",
+   "h": "If one trade moves your price, a *flash loan* moves it more.",
+   "sub": "Full story in the Hack Library. Link in bio 🧙",
+   "say": "If one trade moves your price, a *flash loan* moves it more. Full story in the Hack Library, link in bio."
+  }
+ ]
+}
